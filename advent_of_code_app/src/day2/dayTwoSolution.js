@@ -1,3 +1,5 @@
+import { readFileSync } from "fs";
+
 //assigning values to each position and for win or lose
 const win = 3;
 const lose = 0;
@@ -6,22 +8,26 @@ const lose = 0;
 let totalPoints;
 
 //various plays available
-enemyRock = "rock"; //1
-enemyPaper = "paper"; //2
-enemyScissors = "scissors"; //3
-friendRock = "rock";
-friendPaper = "paper";
-friendScissors = "scissors";
+// a = "rock"; //1
+// b = "paper"; //2
+// c = "scissors"; //3
+// x = "rock";
+// y = "paper";
+// z = "scissors";
 
 const winnerMap = new Map();
-winnerMap.set(friendRock, enemyScissors);
-winnerMap.set(friendPaper, enemyRock);
-winnerMap.set(friendScissors, enemyPaper);
+winnerMap.set(a, z);
+winnerMap.set(b, x);
+winnerMap.set(c, y);
 
-const loseMap = new Map();
-loseMap.set(enemyRock, friendScissors);
-loseMap.set(enemyPaper, friendRock);
-loseMap.set(enemyScissors, friendPaper);
+// const loseMap = new Map();
+// loseMap.set(enemyRock, friendScissors);
+// loseMap.set(enemyPaper, friendRock);
+// loseMap.set(enemyScissors, friendPaper);
+
+function getWinnerMap() {
+  return winnerMap;
+}
 
 //read input file
 function syncReadFile(filename) {
@@ -32,7 +38,19 @@ function syncReadFile(filename) {
   return arr;
 }
 
-let fileAsArray = syncReadFile("./input_text.txt");
+let fileAsArray = syncReadFile("./input.txt");
 const formattedArray = [];
 
-//pass a single game to declare winner and calc points awarded
+//creating formatted array with each game as one element
+fileAsArray.forEach((item) => {
+  formattedArray.push(item);
+});
+
+//loop through array
+//make each "game" an array with the elements being each persons move?
+// toString each game and deliminate on the space
+//check against map
+//add score to total Sum
+//return sum
+
+console.log(formattedArray[2]);
