@@ -1,4 +1,4 @@
-const { readFileSync, promises: fsPromises } = require("fs");
+import { readFileSync } from "fs";
 
 //read txt
 function syncReadFile(filename) {
@@ -32,7 +32,16 @@ formattedArray.forEach((item) => {
   }
 });
 
+//from line 38 -> 42 is for part two of the question!
+var topValue = calArray.sort((a, b) => b - a).slice(0, 3);
+
+const total = topValue.reduce((currItem, item) => currItem + item, 0);
+
 //get max from Array
+console.log("Question part one....");
 console.log(Math.max(...calArray));
+
+console.log("Question part two....");
+console.log(total);
 
 export default syncReadFile;

@@ -6,9 +6,9 @@ const lose = 0;
 let totalPoints;
 
 //various plays available
-enemyRock = "rock";
-enemyPaper = "paper";
-enemyScissors = "scissors";
+enemyRock = "rock"; //1
+enemyPaper = "paper"; //2
+enemyScissors = "scissors"; //3
 friendRock = "rock";
 friendPaper = "paper";
 friendScissors = "scissors";
@@ -23,9 +23,16 @@ loseMap.set(enemyRock, friendScissors);
 loseMap.set(enemyPaper, friendRock);
 loseMap.set(enemyScissors, friendPaper);
 
-//pass a single game to declare winner and calc points awarded
-function sum(a, b) {
-  return a + b;
+//read input file
+function syncReadFile(filename) {
+  const contents = readFileSync(filename, "utf-8");
+
+  const arr = contents.split(/\r?\n/);
+
+  return arr;
 }
 
-export default sum;
+let fileAsArray = syncReadFile("./input_text.txt");
+const formattedArray = [];
+
+//pass a single game to declare winner and calc points awarded
