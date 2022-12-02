@@ -1,0 +1,30 @@
+{
+  "name": "advent_of_code_2022",
+  "version": "1.0.0",
+  "description": "Problems and solutions completed while practicing on the advent of code 2022! My main focus for '23 is to build upon front end skills (my usual day is Java/Backend work) so why not start now? this is the perfect time to learn and fail!",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChubbyAlpacca/Advent_of_Code_2022.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChubbyAlpacca/Advent_of_Code_2022/issues"
+  },
+  "homepage": "https://github.com/ChubbyAlpacca/Advent_of_Code_2022#readme",
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "chalk-animation": "^2.0.3",
+    "figlet": "^1.5.2",
+    "gradient": "^0.2.0",
+    "gradient-string": "^2.0.2",
+    "inquirer": "^9.1.4",
+    "nanospinner": "^1.1.0"
+  }
+}
