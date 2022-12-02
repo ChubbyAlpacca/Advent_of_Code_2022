@@ -1,18 +1,9 @@
-import { readFileSync } from "fs";
+import { fileReader } from "../utils/utils.js";
 
-//read txt
-function syncReadFile(filename) {
-  const contents = readFileSync(filename, "utf-8");
-
-  const arr = contents.split(/\r?\n/);
-
-  return arr;
-}
-
-let fileAsArray = syncReadFile("./input_text.txt");
-const formattedArray = [];
+const fileAsArray = fileReader("./input_text.txt");
 
 //convert array to Numbers
+const formattedArray = [];
 fileAsArray.forEach((item) => {
   formattedArray.push(Number(item));
 });
@@ -43,5 +34,3 @@ console.log(Math.max(...calArray));
 
 console.log("Question part two....");
 console.log(total);
-
-export default syncReadFile;
