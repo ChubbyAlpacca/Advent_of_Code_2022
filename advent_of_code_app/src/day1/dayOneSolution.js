@@ -34,3 +34,5 @@ formattedArray.forEach((item) => {
 
 //get max from Array
 console.log(Math.max(...calArray));
+
+export default syncReadFile;

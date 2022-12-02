@@ -7,3 +7,7 @@ Problems and solutions completed while practicing on the advent of code 2022! My
 in your terminal cd into "./advent_of_code_app/src"
 run "node index.js"
 enjoy!
+
+# To run test suite
+
+run npm test from the terminal
