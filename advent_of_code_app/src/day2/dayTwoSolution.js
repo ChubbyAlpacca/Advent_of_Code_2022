@@ -1,56 +1,158 @@
-import { readFileSync } from "fs";
+import { fileReader } from "../utils/utils.js";
 
 //assigning values to each position and for win or lose
-const win = 3;
-const lose = 0;
+const winPoints = 6;
+const drawPoints = 3;
+const losePoints = 0;
 
 //total sum
-let totalPoints;
+let playerPoints = 0;
+let opponentPoints = 0;
 
 //various plays available
-// a = "rock"; //1
-// b = "paper"; //2
-// c = "scissors"; //3
-// x = "rock";
-// y = "paper";
-// z = "scissors";
+const a = "rock"; //1
+const b = "paper"; //2
+const c = "scissors"; //3
+const x = "rock";
+const y = "paper";
+const z = "scissors";
 
-const winnerMap = new Map();
-winnerMap.set(a, z);
-winnerMap.set(b, x);
-winnerMap.set(c, y);
+//helper funcions
+const playScoreAdder = (play) => {
+  switch (play) {
+    case a:
+      opponentPoints += 1;
+      break;
+    case b:
+      opponentPoints += 2;
+      break;
+    case c:
+      opponentPoints += 3;
+      break;
 
-// const loseMap = new Map();
-// loseMap.set(enemyRock, friendScissors);
-// loseMap.set(enemyPaper, friendRock);
-// loseMap.set(enemyScissors, friendPaper);
+    case x:
+      playerPoints += 1;
+      break;
 
-function getWinnerMap() {
-  return winnerMap;
-}
+    case y:
+      playerPoints += 2;
+      break;
 
-//read input file
-function syncReadFile(filename) {
-  const contents = readFileSync(filename, "utf-8");
+    case z:
+      playerPoints += 3;
+      break;
+  }
+};
 
-  const arr = contents.split(/\r?\n/);
+const winPlayer = (play) => {
+  playerPoints += 6;
+};
 
-  return arr;
-}
+const draw = () => {
+  playerPoints += 3;
+  opponentPoints += 3;
+};
 
-let fileAsArray = syncReadFile("./input.txt");
+const losePlayer = () => {
+  playerPoints += 0;
+};
+
+const winOpponent = () => {
+  opponentPoints += 6;
+};
+
+const drawOpponent = () => {
+  opponentPoints += 6;
+};
+
+const loseOpponent = () => {
+  opponentPoints += 6;
+};
+
 const formattedArray = [];
+const gameArray = [];
+const fileAsArray = fileReader("./input.txt");
 
-//creating formatted array with each game as one element
+// creating formatted array with each game as one element
 fileAsArray.forEach((item) => {
   formattedArray.push(item);
 });
 
-//loop through array
-//make each "game" an array with the elements being each persons move?
-// toString each game and deliminate on the space
-//check against map
-//add score to total Sum
-//return sum
+//populate gameMap
+fileAsArray.forEach((item) => {
+  let itemSplit = item.split(" ");
+  gameArray.push(itemSplit);
+});
 
-console.log(formattedArray[2]);
+gameArray.map((value) => {
+  //win cases
+  if (value[0] === "A" && value[1] === "Z") {
+    console.log(value[0], value[1], "you win (player Rock, Opponent scissors)");
+    winPlayer();
+    playScoreAdder("A");
+    playScoreAdder("Z");
+  }
+  if (value[0] === "B" && value[1] === "X") {
+    console.log(value[0], value[1], "you win (player paper, Opponent Rock)");
+    winPlayer();
+    playScoreAdder("B");
+    playScoreAdder("X");
+  }
+
+  if (value[0] === "C" && value[1] === "Y") {
+    console.log(value[0], value[1], "you win(player scissors, Opponent paper)");
+    winPlayer();
+    playScoreAdder("C");
+    playScoreAdder("Y");
+  }
+  //lose cases
+  if (value[0] === "A" && value[1] === "Y") {
+    console.log(value[0], value[1], "you Lose (player Rock, Opponent Paper)");
+    losePlayer();
+    playScoreAdder("A");
+    playScoreAdder("Y");
+  }
+  if (value[0] === "B" && value[1] === "Z") {
+    console.log(
+      value[0],
+      value[1],
+      "you Lose (player paper, Opponent scissors)"
+    );
+    losePlayer();
+    playScoreAdder("B");
+    playScoreAdder("Z");
+  }
+
+  if (value[0] === "C" && value[1] === "X") {
+    console.log(value[0], value[1], "you Lose(player scissors, Opponent Rock)");
+    losePlayer();
+    playScoreAdder("C");
+    playScoreAdder("X");
+  }
+
+  //Draw Cases
+  if (value[0] === "A" && value[1] === "X") {
+    console.log(value[0], value[1], "you Draw (Opponent Rock, player Rock)");
+    draw();
+    playScoreAdder("A");
+    playScoreAdder("X");
+  }
+  if (value[0] === "C" && value[1] === "Z") {
+    console.log(
+      value[0],
+      value[1],
+      "you Draw (Opponent Scissors, player Scissors)"
+    );
+    draw();
+    playScoreAdder("C");
+    playScoreAdder("Z");
+  }
+  if (value[0] === "B" && value[1] === "Y") {
+    console.log(value[0], value[1], "you Draw (Opponent Paper, player Paper)");
+    draw();
+    playScoreAdder("B");
+    playScoreAdder("Y");
+  }
+});
+
+console.log({ player: playerPoints, opponent: opponentPoints });
