@@ -22,8 +22,8 @@ function getLetterValue(letter) {
 }
 
 //split each array element in to two halves
-function compartmentSplit(backpack) {
-  const result = backpack.map((line) => {
+function compartmentSplit(inputText) {
+  const result = inputText.map((line) => {
     line.trim;
     const part1 = [...line.slice(0, line.length / 2)];
     const part2 = [...line.slice(line.length / 2)];
@@ -36,10 +36,39 @@ function compartmentSplit(backpack) {
   });
 
   var finalResult = result.reduce((a, b) => a + b, 0);
-  console.log(finalResult);
+  console.log("part one result : " + finalResult);
 }
 
-//loop through
+function teamCommonItems(inputText) {
+  let totalSum = 0;
+
+  for (let i = 0; i < inputText.length; i += 3) {
+    const teams = [
+      [...inputText[i]],
+      [...inputText[i + 1]],
+      [...inputText[i + 2]],
+    ];
+
+    // comparing bag 0 to bag 1 for any matching items
+    let set = new Set(teams[0]);
+    let crossOver = teams[1].filter((x) => set.has(x));
+
+    //comparing final bag (2) to previous matching items
+    set = new Set(crossOver);
+    crossOver = teams[2].filter((x) => set.has(x));
+
+    //deduplication of items
+    let deduplication = [...new Set(crossOver)];
+
+    totalSum += getLetterValue(deduplication[0]);
+  }
+  console.log("part two result : " + totalSum);
+}
 
 let fileAsArray = syncReadFile("./input.txt");
+
+//part 1 solution
 compartmentSplit(fileAsArray);
+
+//part 2 solution
+teamCommonItems(fileAsArray);
