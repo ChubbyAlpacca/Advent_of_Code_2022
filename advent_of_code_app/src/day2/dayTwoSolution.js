@@ -20,25 +20,25 @@ const z = "scissors";
 //helper funcions
 const playScoreAdder = (play) => {
   switch (play) {
-    case a:
+    case "A":
       opponentPoints += 1;
       break;
-    case b:
+    case "B":
       opponentPoints += 2;
       break;
-    case c:
+    case "C":
       opponentPoints += 3;
       break;
 
-    case x:
+    case "X":
       playerPoints += 1;
       break;
 
-    case y:
+    case "Y":
       playerPoints += 2;
       break;
 
-    case z:
+    case "Z":
       playerPoints += 3;
       break;
   }
@@ -54,7 +54,7 @@ const draw = () => {
 };
 
 const losePlayer = () => {
-  playerPoints += 0;
+  opponentPoints += 6;
 };
 
 const winOpponent = () => {
@@ -153,6 +153,7 @@ gameArray.map((value) => {
     playScoreAdder("B");
     playScoreAdder("Y");
   }
+  console.log({ player: playerPoints, opponent: opponentPoints });
 });
 
-console.log({ player: playerPoints, opponent: opponentPoints });
+// console.log({ player: playerPoints, opponent: opponentPoints });
